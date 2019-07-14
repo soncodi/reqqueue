@@ -17,12 +17,10 @@
 npm install @soncodi/reqqueue --save
 ```
 
-### Usage
+### Usage (TypeScript)
 
-```js
+```typescript
 import { ReqQueue } from '@soncodi/reqqueue';
-// or
-const { ReqQueue } = require('@soncodi/reqqueue');
 
 const q = new ReqQueue(false);
 
