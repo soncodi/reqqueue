@@ -1,4 +1,4 @@
-import { TestFixture, AsyncTest, TestCase, Expect } from 'alsatian';
+import { TestFixture, Test, TestCase, Expect } from 'alsatian';
 import { ReqQueue } from '../src';
 
 const delayRet = async <T>(ms: number, ret: T) => {
@@ -9,20 +9,20 @@ const delayRet = async <T>(ms: number, ret: T) => {
 
 @TestFixture()
 export class ReqQueueTests {
-  @AsyncTest()
+  @Test()
   @TestCase(false)
   @TestCase(true)
   async queueSimple(tick: boolean) {
     const req = new ReqQueue(tick);
 
     const res1 = await req.add(() => 1);
-    const res2 = await req.add(async () => 2);
+    const res2 = await req.add(async () => 'a');
 
     Expect(res1).toBe(1);
-    Expect(res2).toBe(2);
+    Expect(res2).toBe('a');
   }
 
-  @AsyncTest()
+  @Test()
   @TestCase(false)
   @TestCase(true)
   async queueThrow(tick: boolean) {
@@ -33,7 +33,7 @@ export class ReqQueueTests {
     ).toThrowAsync();
   }
 
-  @AsyncTest()
+  @Test()
   @TestCase(false)
   @TestCase(true)
   async queueMultiple(tick: boolean) {
@@ -41,13 +41,13 @@ export class ReqQueueTests {
 
     const res = await Promise.all([
       req.add(() => 1),
-      req.add(() => 2)
+      req.add(() => 'a')
     ]);
 
-    Expect(res).toEqual([1, 2]);
+    Expect(res).toEqual([1, 'a']);
   }
 
-  @AsyncTest()
+  @Test()
   @TestCase(false)
   @TestCase(true)
   async queueMultipleAsync(tick: boolean) {
@@ -55,13 +55,13 @@ export class ReqQueueTests {
 
     const res = await Promise.all([
       req.add(async () => 1),
-      req.add(async () => 2)
+      req.add(async () => 'a')
     ]);
 
-    Expect(res).toEqual([1, 2]);
+    Expect(res).toEqual([1, 'a']);
   }
 
-  @AsyncTest()
+  @Test()
   @TestCase(false)
   @TestCase(true)
   async queueInterleaved(tick: boolean) {
@@ -69,11 +69,11 @@ export class ReqQueueTests {
 
     const res = await Promise.all([
       req.add(async () => delayRet(50, 1)),
-      req.add(async () => delayRet(10, 2)),
-      req.add(async () => delayRet(50, 3)),
-      req.add(async () => delayRet(10, 4))
+      req.add(async () => delayRet(10, 'a')),
+      req.add(async () => delayRet(50, 2)),
+      req.add(async () => delayRet(10, 'b'))
     ]);
 
-    Expect(res).toEqual([1, 2, 3, 4]);
+    Expect(res).toEqual([1, 'a', 2, 'b']);
   }
 }

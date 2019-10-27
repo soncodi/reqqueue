@@ -5,7 +5,7 @@
 [![Dependency Status](https://david-dm.org/soncodi/reqqueue/status.svg)](https://david-dm.org/soncodi/reqqueue)
 [![npm version](https://badge.fury.io/js/%40soncodi%2Freqqueue.svg)](https://badge.fury.io/js/%40soncodi%2Freqqueue)
 
-**Sequential request queue for Node.js and browsers**
+**Sequential request queue for Node.js and browsers. No dependencies.**
 
 - Requests are executed in the order in which they were queued
 - Execution of requests is sequential (not interleaved)

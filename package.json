@@ -34,8 +34,8 @@
     "push": "cd ./build/package && npm publish --access=public"
   },
   "devDependencies": {
-    "alsatian": "~2.4.0",
+    "alsatian": "~3.1.0",
     "nyc": "~14.1.1",
-    "typescript": "~3.5.3"
+    "typescript": "~3.6.4"
   }
 }
