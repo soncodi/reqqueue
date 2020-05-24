@@ -1,6 +1,6 @@
 {
   "name": "@soncodi/reqqueue",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Sequential request queue for Node.js and browsers.",
   "private": true,
   "author": "Alex Soncodi",
